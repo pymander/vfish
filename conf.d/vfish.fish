@@ -11,5 +11,21 @@ if test 'vterm' = "$INSIDE_EMACS" \
         end
     end
 
+    # Clean up old junk functions just in case.
+    functions --erase vterm_old_fish_prompt
+
+    # Load the setup that comes with vterm.
     source "$EMACS_VTERM_PATH/etc/emacs-vterm.fish"
+
+    function vf --description 'Open a file for editing in Emacs from vterm'
+        vterm_cmd find-file (realpath "$argv")
+    end
+
+    function vd --description 'Run dired on a directory from vterm'
+        vterm_cmd dired (dirname (realpath "$argv"))
+    end
+
+    function vdiff --argument-names filea fileb --description 'Run ediff-files on files A and B'
+        vterm_cmd ediff-files (realpath "$filea") (realpath "$fileb")
+    end
 end

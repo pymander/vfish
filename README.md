@@ -16,7 +16,27 @@ You can install this plugin using this command:
 fisher install pymander/vfish
 ```
 
-### Issues
+## Emacs Configuration
+
+This adds a number of commands to your vterm sessions.
+
+- **vf** - Call `find-file` on a file.
+- **vd** - Call `dired` on a directory.
+- **vdiff** - Call `ediff` on two files.
+
+In order to use these commands, however, you must configure
+`vterm-eval-cmds` in Emacs. Insert this or something similar in your
+startup file.
+
+```elisp
+(setq vterm-eval-cmds '(("find-file" find-file)
+                        ("message" message)
+                        ("vterm-clear-scrollback" vterm-clear-scrollback)
+                        ("dired" dired)
+                        ("ediff-files" ediff-files)))
+```
+
+## Issues
 
 Currently, this doesn't work very well with
 [tide](https://github.com/ilancosman/tide), which is a bummer, since
