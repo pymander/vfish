@@ -28,4 +28,14 @@ if test 'vterm' = "$INSIDE_EMACS" \
     function vdiff --argument-names filea fileb --description 'Run ediff-files on files A and B'
         vterm_cmd ediff-files (realpath "$filea") (realpath "$fileb")
     end
+
+    function vz --description 'Use "z" to run dired directly from vterm'
+        if functions --query __z
+            set -l dir (z -e "$argv[1]")
+            vterm_cmd dired (dirname (realpath "$dir"))
+        else
+            echo "Install z for fish shell from https://github.com/jethrokuan/z to use this command."
+            return 1
+        end
+    end
 end
