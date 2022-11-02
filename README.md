@@ -24,6 +24,10 @@ This adds a number of commands to your vterm sessions.
 - **vd** - Call `dired` on a directory.
 - **vdiff** - Call `ediff` on two files.
 
+In addition, if you have [z](https://github.com/jethrokuan/z)
+installed, you can use **vz** to call `dired` on a directory matched
+using z's system.
+
 In order to use these commands, however, you must configure
 `vterm-eval-cmds` in Emacs. Insert this or something similar in your
 startup file.
