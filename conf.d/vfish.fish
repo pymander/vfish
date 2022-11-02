@@ -22,7 +22,11 @@ if test 'vterm' = "$INSIDE_EMACS" \
     end
 
     function vd --description 'Run dired on a directory from vterm'
-        vterm_cmd dired (dirname (realpath "$argv"))
+        set -f dir "$argv"
+        if test "x" = "x$dir"
+            set dir (pwd)
+        end
+        vterm_cmd dired (realpath "$dir")
     end
 
     function vdiff --argument-names filea fileb --description 'Run ediff-files on files A and B'
@@ -32,7 +36,7 @@ if test 'vterm' = "$INSIDE_EMACS" \
     function vz --description 'Use "z" to run dired directly from vterm'
         if functions --query __z
             set -l dir (z -e "$argv[1]")
-            vterm_cmd dired (dirname (realpath "$dir"))
+            vterm_cmd dired (realpath "$dir")
         else
             echo "Install z for fish shell from https://github.com/jethrokuan/z to use this command."
             return 1
